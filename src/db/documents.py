@@ -1,5 +1,7 @@
 from mongoengine.document import Document
-from mongoengine.fields import StringField, IntField
+from mongoengine.fields import StringField, IntField, DateTimeField
+
+from datetime import datetime
 
 
 class Category(Document):
@@ -17,3 +19,4 @@ class Contact(Document):
     phone = StringField()
     email = StringField()
     message = StringField()
+    created_at = DateTimeField(default=datetime.utcnow)
