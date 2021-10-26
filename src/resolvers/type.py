@@ -1,4 +1,4 @@
-from graphene import ObjectType, String
+from graphene import ObjectType, String, Int
 
 
 class ProductType(ObjectType):
@@ -7,3 +7,8 @@ class ProductType(ObjectType):
     formulator = String()
     category = String()
     image = String()
+
+class CategoryType(ObjectType):
+    id = String()
+    name = String()
+    sequence = Int()

@@ -1,26 +1,15 @@
 from mongoengine.document import Document
-from mongoengine.fields import StringField, EnumField
-
-from enum import Enum
+from mongoengine.fields import StringField, IntField
 
 
-class Formulator(Enum):
-    Catawba = 'Catawba Enterprising'
-    Symborg = 'Symborg'
-    Folterra = 'Folterra'
-    ACP = 'Agrocorrectores del Pacífico'
-
-class Category(Enum):
-    Bioestimulante = 'Bioestimulante'
-    Biopesticida = 'Biopesticida'
-    Biofertilizante = 'Biofertilizante'
-    Corrector = 'Corrector de Suelo'
-    Fertilizante = 'Fertilizante Foliar'
+class Category(Document):
+    name = StringField(required=True, unique=True)
+    sequence = IntField(required=True)
 
 class Product(Document):
     name = StringField(required=True)
-    formulator = EnumField(Formulator, required=True)
-    category = EnumField(Category, required=True)
+    formulator = StringField(required=True)
+    category = StringField(required=True)
     image = StringField()
 
 class Contact(Document):
