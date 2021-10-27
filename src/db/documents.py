@@ -6,7 +6,7 @@ from datetime import datetime
 
 class Category(Document):
     name = StringField(required=True, unique=True)
-    sequence = IntField(required=True)
+    sequence = IntField(required=True, unique=True)
 
 class Product(Document):
     name = StringField(required=True)
@@ -22,30 +22,30 @@ class Contact(Document):
     created_at = DateTimeField(default=datetime.utcnow)
 
 class Carousel(Document):
-    title = StringField()
-    text = StringField()
-    image = StringField()
-    sequence = IntField(required=True)
+    title = StringField(required=True)
+    text = StringField(required=True)
+    image = StringField(required=True)
+    sequence = IntField(required=True, unique=True)
     updated_at = DateTimeField(default=datetime.utcnow)
 
 class Home(Document):
-    title = StringField()
-    text = StringField()
+    title = StringField(required=True)
+    text = StringField(required=True)
     updated_at = DateTimeField(default=datetime.utcnow)
 
 class ProductHeader(Document):
-    title = StringField()
-    text = StringField()
+    title = StringField(required=True)
+    text = StringField(required=True)
     updated_at = DateTimeField(default=datetime.utcnow)
 
 class Us(Document):
-    title = StringField()
-    text = StringField()
-    sequence = IntField(required=True)
+    title = StringField(required=True)
+    text = StringField(required=True)
+    sequence = IntField(required=True, unique=True)
     updated_at = DateTimeField(default=datetime.utcnow)
 
 class ContactInfo(Document):
-    title = StringField()
-    text = StringField()
-    sequence = IntField(required=True)
+    title = StringField(required=True)
+    text = StringField(required=True)
+    sequence = IntField(required=True, unique=True)
     updated_at = DateTimeField(default=datetime.utcnow)

@@ -1,5 +1,4 @@
-from graphene import ObjectType
-from graphene import List
+from graphene import ObjectType, List, Field
 
 from ...services.maere_service import (
     get_carousel, 
@@ -19,8 +18,8 @@ from ..type import (
 
 class Query(ObjectType):
     get_carousel = List(CarouselType)
-    get_home = List(HomeType)
-    get_product_header = List(ProductHeaderType)
+    get_home = Field(HomeType)
+    get_product_header = Field(ProductHeaderType)
     get_us = List(UsType)
     get_contact_info = List(ContactInfoType)
 
