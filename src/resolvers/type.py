@@ -22,6 +22,7 @@ class ContactType(ObjectType):
     created_at = DateTime()
 
 class CarouselType(ObjectType):
+    id = String()
     title = String()
     text = String()
     image = String()
@@ -29,22 +30,26 @@ class CarouselType(ObjectType):
     updated_at = DateTime()
 
 class HomeType(ObjectType):
+    id = String()
     title = String()
     text = String()
     updated_at = DateTime()
 
 class ProductHeaderType(ObjectType):
+    id = String()
     title = String()
     text = String()
     updated_at = DateTime()
 
 class UsType(ObjectType):
+    id = String()
     title = String()
     text = String()
     sequence = Int()
     updated_at = DateTime()
 
 class ContactInfoType(ObjectType):
+    id = String()
     title = String()
     text = String()
     sequence = Int()
