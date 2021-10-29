@@ -1,4 +1,9 @@
-from graphene import ObjectType, String, Int, DateTime
+from graphene import (
+    ObjectType, 
+    String, 
+    Int, 
+    DateTime
+)
 
 
 class ProductType(ObjectType):
@@ -7,6 +12,7 @@ class ProductType(ObjectType):
     formulator = String()
     category = String()
     image = String()
+    url = String()
 
 class CategoryType(ObjectType):
     id = String()

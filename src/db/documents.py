@@ -1,5 +1,10 @@
 from mongoengine.document import Document
-from mongoengine.fields import StringField, IntField, DateTimeField
+from mongoengine.fields import (
+    StringField, 
+    IntField, 
+    DateTimeField,
+    URLField
+)
 
 from datetime import datetime
 
@@ -13,6 +18,7 @@ class Product(Document):
     formulator = StringField(required=True)
     category = StringField(required=True)
     image = StringField()
+    url = URLField()
 
 class Contact(Document):
     name = StringField()
