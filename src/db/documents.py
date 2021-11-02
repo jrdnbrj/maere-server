@@ -55,3 +55,7 @@ class ContactInfo(Document):
     text = StringField(required=True)
     sequence = IntField(required=True, unique=True)
     updated_at = DateTimeField(default=datetime.utcnow)
+
+class Password(Document):
+    password = StringField(required=True)
+    updated_at = DateTimeField(default=datetime.utcnow)
