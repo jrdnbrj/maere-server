@@ -26,8 +26,11 @@ def create_product(**kwargs):
 def edit_product(**kwargs):
     product = Product.objects(id=kwargs.get('id'))
 
-    img = kwargs.get('image').split('base64,')[1]
-    kwargs['image'] = base64_to_file(img)
+    if '/static/' not in kwargs.get('image'):
+        img = kwargs.get('image').split('base64,')[1]
+        kwargs['image'] = base64_to_file(img)
+    else:
+        kwargs['image'] = kwargs.get('image').split('/')[-1]
 
     product.update(**kwargs)
 
