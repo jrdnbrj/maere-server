@@ -1,5 +1,4 @@
-from graphene import ObjectType, Mutation
-from graphene import String, Boolean
+from graphene import ObjectType, Mutation, String, Boolean
 
 from ...services.contact_service import create_contact, delete_contact
 
@@ -18,7 +17,13 @@ class CreateContact(Mutation):
     message = String()
 
     def mutate(root, info, name=None, phone=None, email=None, message=None):
-        return create_contact(name=name, phone=phone, email=email, message=message)
+        result = create_contact(
+            name=name, 
+            phone=phone, 
+            email=email, 
+            message=message
+        )
+        return { 'result': result }
 
 
 class DeleteContact(Mutation):

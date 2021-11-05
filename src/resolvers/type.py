@@ -36,13 +36,11 @@ class CarouselType(ObjectType):
     updated_at = DateTime()
 
 class HomeType(ObjectType):
-    id = String()
     title = String()
     text = String()
     updated_at = DateTime()
 
 class ProductHeaderType(ObjectType):
-    id = String()
     title = String()
     text = String()
     updated_at = DateTime()
@@ -59,4 +57,8 @@ class ContactInfoType(ObjectType):
     title = String()
     text = String()
     sequence = Int()
+    updated_at = DateTime()
+
+class PasswordType(ObjectType):
+    password = String()
     updated_at = DateTime()

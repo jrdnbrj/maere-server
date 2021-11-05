@@ -7,13 +7,13 @@ def get_categories():
 
 def create_category(name):
     sequence = get_categories().count()
-    return Category(name=name, sequence=sequence+1).save()
+    Category(name=name, sequence=sequence+1).save()
+
+    return True
 
 
 def edit_category(id, name):
-    category = Category.objects(id=id)
-    category.name = name
-    category.save()
+    Category.objects(id=id).update(name=name)
 
     return True
 

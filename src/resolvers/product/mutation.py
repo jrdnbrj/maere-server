@@ -17,7 +17,7 @@ class CreateProduct(Mutation):
 
     result = Boolean()
 
-    def mutate(root, info, name=None, formulator=None, category=None, url=None, image=None):
+    def mutate(root, info, name, formulator, category, url, image):
         result = create_product(
             name=name, 
             formulator=formulator,
@@ -34,11 +34,11 @@ class EditProduct(Mutation):
         formulator = String(required=True)
         category = String(required=True)
         url = String(required=True)
-        image = String(required=True)
+        image = String()
 
     result = Boolean()
 
-    def mutate(root, info, id=None, name=None, formulator=None, category=None, url=None, image=None):
+    def mutate(root, info, id, name, formulator, category, url, image=None):
         result = edit_product(
             id=id, 
             name=name, 
@@ -55,7 +55,7 @@ class DeleteProduct(Mutation):
 
     result = Boolean()
 
-    def mutate(root, info, id=None):
+    def mutate(root, info, id):
         result = delete_product(id=id)
         return { 'result': result }
 
