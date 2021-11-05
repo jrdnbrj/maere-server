@@ -83,7 +83,7 @@ class EditProductHeader(Mutation):
 
 class EditUs(Mutation):
     class Arguments:
-        id = String(required=True)
+        id = ID(required=True)
         title = String(required=True)
         text = String(required=True)
 
@@ -95,7 +95,7 @@ class EditUs(Mutation):
 
 class EditContactInfo(Mutation):
     class Arguments:
-        id = String(required=True)
+        id = ID(required=True)
         title = String(required=True)
         text = String(required=True)
 
