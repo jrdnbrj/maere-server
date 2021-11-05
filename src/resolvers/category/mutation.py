@@ -12,7 +12,7 @@ class CreateCategory(Mutation):
 
     result = Boolean()
 
-    def mutate(root, info, name=None):
+    def mutate(root, info, name):
         result = create_category(name=name)
         return { 'result': result }
 
@@ -23,7 +23,7 @@ class EditCategory(Mutation):
 
     result = Boolean()
 
-    def mutate(root, info, id=None, name=None):
+    def mutate(root, info, id, name):
         result = edit_category(id=id, name=name)
         return { 'result': result }
 
@@ -33,7 +33,7 @@ class DeleteCategory(Mutation):
 
     result = Boolean()
 
-    def mutate(root, info, id=None):
+    def mutate(root, info, id):
         result = delete_category(id=id)
         return { 'result': result }
 

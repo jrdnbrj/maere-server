@@ -1,3 +1,6 @@
+import os
+from decouple import config
+
 from ..db.documents import (
     Carousel, 
     Home, 
@@ -5,11 +8,13 @@ from ..db.documents import (
     Us, 
     ContactInfo
 )
-
-from decouple import config
+from .utils import base64_to_file
 
 
 def create_carousel(**kwargs):
+    img = kwargs.get('image').split('base64,')[1]
+    kwargs['image'] = base64_to_file(img)
+
     return Carousel(**kwargs).save()
 
 def get_carousel():
@@ -22,14 +27,20 @@ def get_carousel():
 
 def edit_carousel(**kwargs):
     carousel = Carousel.objects(id=kwargs.get('id'))
+
+    if kwargs.get('image') is None:
+        kwargs.pop('image')
+    else:
+        img = kwargs.get('image').split('base64,')[1]
+        kwargs['image'] = base64_to_file(img)
+
     carousel.update(**kwargs)
 
     return True
 
 def delete_carousel(id):
-    carousel = Carousel.objects(id=id)
-    carousel.delete()
-
+    Carousel.objects(id=id).delete()
+    
     return True
 
 def get_home():

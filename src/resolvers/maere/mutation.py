@@ -1,8 +1,9 @@
-from graphene import ObjectType, Mutation, String, Boolean
+from graphene import ObjectType, Mutation, String, Boolean, Int, ID
 
 from ...services.maere_service import (
     create_carousel,
     edit_carousel,
+    delete_carousel,
     edit_home,
     edit_product_header,
     edit_us,
@@ -12,14 +13,14 @@ from ...services.maere_service import (
 
 class CreateCarousel(Mutation):
     class Arguments:
-        title = String()
-        text = String()
-        image = String()
-        sequence = String()
+        title = String(required=True)
+        text = String(required=True)
+        image = String(required=True)
+        sequence = Int(required=True)
 
     result = Boolean()
 
-    def mutate(root, info, title=None, text=None, image=None, sequence=None):
+    def mutate(root, info, title, text, image, sequence):
         result = create_carousel(
             title=title, 
             text=text, 
@@ -30,77 +31,77 @@ class CreateCarousel(Mutation):
 
 class EditCarousel(Mutation):
     class Arguments:
-        id = String()
-        title = String()
-        text = String()
+        id = ID(required=True)
+        title = String(required=True)
+        text = String(required=True)
+        sequence = Int(required=True)
         image = String()
-        sequence = String()
 
     result = Boolean()
 
-    def mutate(root, info, id=None, title=None, text=None, image=None, sequence=None):
+    def mutate(root, info, id, title, text, sequence, image=None):
         result = edit_carousel(
             id=id, 
             title=title, 
             text=text, 
-            image=image, 
-            sequence=sequence
+            sequence=sequence,
+            image=image
         )
         return { 'result': result }
 
 class DeleteCarousel(Mutation):
     class Arguments:
-        id = String()
+        id = ID(required=True)
 
     result = Boolean()
 
-    def mutate(root, info, id=None):
-        result = edit_carousel(id=id)
+    def mutate(root, info, id):
+        result = delete_carousel(id=id)
         return { 'result': result }
 
 class EditHome(Mutation):
     class Arguments:
-        title = String()
-        text = String()
+        title = String(required=True)
+        text = String(required=True)
 
     result = Boolean()
 
-    def mutate(root, info, title=None, text=None):
+    def mutate(root, info, title, text):
         result = edit_home(title=title, text=text)
         return { 'result': result }
 
 class EditProductHeader(Mutation):
     class Arguments:
-        title = String()
-        text = String()
+        title = String(required=True)
+        text = String(required=True)
 
     result = Boolean()
 
-    def mutate(root, info, title=None, text=None):
+    def mutate(root, info, title, text):
         result = edit_product_header(title=title, text=text)
         return { 'result': result }
 
 class EditUs(Mutation):
     class Arguments:
-        id = String()
-        title = String()
-        text = String()
+        id = String(required=True)
+        title = String(required=True)
+        text = String(required=True)
 
     result = Boolean()
 
-    def mutate(root, info, id=None, title=None, text=None):
+    def mutate(root, info, id, title, text):
         result = edit_us(id=id, title=title, text=text)
         return { 'result': result }
 
 class EditContactInfo(Mutation):
     class Arguments:
-        id = String()
-        title = String()
-        text = String()
+        id = String(required=True)
+        title = String(required=True)
+        text = String(required=True)
 
     result = Boolean()
 
-    def mutate(root, info, id=None, title=None, text=None):
+    def mutate(root, info, id, title, text):
         result = edit_contact_info(id=id, title=title, text=text)
         return { 'result': result }
 
