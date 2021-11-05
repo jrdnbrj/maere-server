@@ -34,9 +34,10 @@ class DeleteCategory(Mutation):
     result = Boolean()
 
     def mutate(root, info, id=None):
-        result = delete_category(id=id, name=None)
+        result = delete_category(id=id)
         return { 'result': result }
 
 class Mutation(ObjectType):
     create_category = CreateCategory.Field()
     edit_category = EditCategory.Field()
+    delete_category = DeleteCategory.Field()

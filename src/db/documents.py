@@ -15,8 +15,8 @@ class Category(Document):
 
 class Product(Document):
     name = StringField(required=True)
-    formulator = StringField(required=True)
-    category = StringField(required=True)
+    formulator = StringField(required=True, min_length=1)
+    category = StringField(required=True, min_length=1)
     image = StringField()
     url = URLField()
 
