@@ -18,6 +18,7 @@ class CategoryType(ObjectType):
     id = String()
     name = String()
     sequence = Int()
+    products = Int()
 
 class ContactType(ObjectType):
     id = String()
