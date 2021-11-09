@@ -1,8 +1,18 @@
-from ..db.documents import Category
+from ..db.documents import Category, Product
 
 
 def get_categories():
-    return Category.objects().order_by('sequence')
+    products = Product.objects()
+    categories = Category.objects().order_by('sequence')
+
+    for category in categories:
+        cont = 0
+        for product in products:
+            if product.category == category.name:
+                cont = cont + 1
+        category.products = cont
+
+    return categories
 
 
 def create_category(name):
