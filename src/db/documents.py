@@ -31,7 +31,7 @@ class Carousel(Document):
     title = StringField(required=True)
     text = StringField(required=True)
     image = StringField(required=True)
-    sequence = IntField(required=True, unique=True)
+    sequence = IntField(required=True)
     updated_at = DateTimeField(default=datetime.utcnow)
 
 class Home(Document):
