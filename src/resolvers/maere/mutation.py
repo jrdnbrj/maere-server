@@ -7,7 +7,9 @@ from ...services.maere_service import (
     edit_home,
     edit_product_header,
     edit_us,
-    edit_contact_info
+    edit_contact_info,
+    login,
+    update_password
 )
 
 
@@ -105,6 +107,29 @@ class EditContactInfo(Mutation):
         result = edit_contact_info(id=id, title=title, text=text)
         return { 'result': result }
 
+class Login(Mutation):
+    class Arguments:
+        password = String(required=True)
+    
+    token = String()
+    success = Boolean()
+
+    def mutate(self, info, password):
+        token, success = login(password)
+        print('Token:', token, success)
+        return {'token': token, 'success': success}
+
+class UpdatePassword(Mutation):
+    class Arguments:
+        password = String(required=True)
+        new_password = String(required=True)
+
+    response = String()
+
+    def mutate(root, info, password=None, new_password=None):
+        response = update_password(password, new_password)
+        return { 'response': response }
+
 class Mutation(ObjectType):
     create_carousel = CreateCarousel.Field()
     edit_carousel = EditCarousel.Field()
@@ -113,3 +138,5 @@ class Mutation(ObjectType):
     edit_product_header = EditProductHeader.Field()
     edit_us = EditUs.Field()
     edit_contact_info = EditContactInfo.Field()
+    login = Login.Field()
+    update_password = UpdatePassword.Field()

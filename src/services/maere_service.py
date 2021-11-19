@@ -1,4 +1,3 @@
-import os
 from decouple import config
 
 from ..db.documents import (
@@ -8,8 +7,12 @@ from ..db.documents import (
     Us, 
     ContactInfo
 )
-from .utils import base64_to_file
-
+from .utils import (
+    base64_to_file, 
+    generate_token, 
+    verify_password, 
+    encrypt_password
+)
 
 def create_carousel(**kwargs):
     img = kwargs.get('image').split('base64,')[1]
@@ -78,3 +81,28 @@ def edit_contact_info(**kwargs):
     contact_info.update(**kwargs)
 
     return True
+
+def login(password):
+    success, _ = verify_password(password)
+
+    if success:
+        return generate_token(), True
+
+    return 'La contraseña es incorrecta.', False
+
+def update_password(password, new_password):
+    success, session = verify_password(password)
+
+    if success:
+        if len(new_password) < 8:
+            return 'La nueva contraseña debe tener al menos 8 caracteres.'
+
+        if len(new_password) > 20:
+            return 'La nueva contraseña debe tener menos de 20 caracteres.'
+
+        session.password = encrypt_password(new_password)
+        session.save()
+        
+        return 'OK'
+    else:
+        return 'Las contraseñas no coinciden.'
