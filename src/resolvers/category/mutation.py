@@ -1,5 +1,6 @@
 from graphene import ObjectType, Mutation, String, Boolean
 
+from ...middleware import authentication_required
 from ...services.category_service import (
     create_category, 
     edit_category, 
@@ -12,6 +13,7 @@ class CreateCategory(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, name):
         result = create_category(name=name)
         return { 'result': result }
@@ -23,6 +25,7 @@ class EditCategory(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id, name):
         result = edit_category(id=id, name=name)
         return { 'result': result }
@@ -33,6 +36,7 @@ class DeleteCategory(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id):
         result = delete_category(id=id)
         return { 'result': result }

@@ -1,5 +1,6 @@
 from graphene import ObjectType, Mutation, String, Boolean, Int, ID
 
+from ...middleware import authentication_required
 from ...services.maere_service import (
     create_carousel,
     edit_carousel,
@@ -22,6 +23,7 @@ class CreateCarousel(Mutation):
 
     result = Boolean()
 
+    # @authentication_required()
     def mutate(root, info, title, text, image, sequence):
         result = create_carousel(
             title=title, 
@@ -41,6 +43,7 @@ class EditCarousel(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id, title, text, sequence, image=None):
         result = edit_carousel(
             id=id, 
@@ -57,6 +60,7 @@ class DeleteCarousel(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id):
         result = delete_carousel(id=id)
         return { 'result': result }
@@ -68,6 +72,7 @@ class EditHome(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, title, text):
         result = edit_home(title=title, text=text)
         return { 'result': result }
@@ -79,6 +84,7 @@ class EditProductHeader(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, title, text):
         result = edit_product_header(title=title, text=text)
         return { 'result': result }
@@ -91,6 +97,7 @@ class EditUs(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id, title, text):
         result = edit_us(id=id, title=title, text=text)
         return { 'result': result }
@@ -103,6 +110,7 @@ class EditContactInfo(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id, title, text):
         result = edit_contact_info(id=id, title=title, text=text)
         return { 'result': result }
@@ -116,7 +124,6 @@ class Login(Mutation):
 
     def mutate(self, info, password):
         token, success = login(password)
-        print('Token:', token, success)
         return {'token': token, 'success': success}
 
 class UpdatePassword(Mutation):
@@ -126,6 +133,7 @@ class UpdatePassword(Mutation):
 
     response = String()
 
+    @authentication_required()
     def mutate(root, info, password=None, new_password=None):
         response = update_password(password, new_password)
         return { 'response': response }

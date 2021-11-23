@@ -17,8 +17,10 @@ from .utils import (
 def create_carousel(**kwargs):
     img = kwargs.get('image').split('base64,')[1]
     kwargs['image'] = base64_to_file(img)
+    
+    Carousel(**kwargs).save()
 
-    return Carousel(**kwargs).save()
+    return True
 
 def get_carousel():
     carousel = Carousel.objects().order_by('sequence')

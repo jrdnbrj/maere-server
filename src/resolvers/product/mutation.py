@@ -1,6 +1,7 @@
 from graphene import ObjectType, Mutation
 from graphene import String, Boolean
 
+from ...middleware import authentication_required
 from ...services.product_service import (
     create_product, 
     edit_product, 
@@ -17,6 +18,7 @@ class CreateProduct(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, name, formulator, category, url, image):
         result = create_product(
             name=name, 
@@ -38,6 +40,7 @@ class EditProduct(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id, name, formulator, category, url, image=None):
         result = edit_product(
             id=id, 
@@ -55,6 +58,7 @@ class DeleteProduct(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id):
         result = delete_product(id=id)
         return { 'result': result }

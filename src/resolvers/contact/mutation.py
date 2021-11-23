@@ -1,6 +1,7 @@
 from graphene import ObjectType, Mutation, String, Boolean
 
 from ...services.contact_service import create_contact, delete_contact
+from ...middleware import authentication_required
 
 
 class CreateContact(Mutation):
@@ -32,6 +33,7 @@ class DeleteContact(Mutation):
 
     result = Boolean()
 
+    @authentication_required()
     def mutate(root, info, id=None):
         result = delete_contact(id)
         return { 'result': result }
