@@ -5,4 +5,4 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD uvicorn main:app --host ${HOST} --port ${PORT} --reload --ssl-keyfile=${SSL_KEYFILE} --ssl-certfile=${SSL_CERTFILE}
+CMD uvicorn main:app --host ${HOST} --port ${PORT} --reload
