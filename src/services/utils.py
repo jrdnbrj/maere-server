@@ -38,3 +38,31 @@ def verify_password(password):
     current_password = decrypt_password(session.password)
 
     return current_password == password, session
+
+def send_email():
+    print('11111')
+    import smtplib
+    from email.message import EmailMessage
+    print('22222')
+
+    msg = EmailMessage()
+    msg['Subject'] = 'New Contact Info'
+    msg['From'] = 'info@maere.com.ec'
+    msg['To'] = 'paola@maere.com.ec'
+    msg.set_content('Mensaaaje')
+    print('3333')
+
+    with smtplib.SMTP_SSL('mail.maere.com.ec', 465) as smtp:
+        try:
+            print('4444')
+            smtp.login('info@maere.com.ec', '')
+            print('5555')
+            smtp.send_message(msg)
+            print('6666')
+        except Exception as e:
+            # print(e)
+            print('❌❌❌')
+            return False
+
+    return True
+
