@@ -13,3 +13,5 @@ services:
       - PYTHONUNBUFFERED=1
       - HOST=0.0.0.0
       - PORT=8000
+      - SSL_KEYFILE=/app/localhost+3-key.pem
+      - SSL_CERTFILE=/app/localhost+3.pem
