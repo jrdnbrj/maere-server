@@ -9,6 +9,7 @@ from ...services.maere_service import (
     edit_product_header,
     edit_us,
     edit_contact_info,
+    edit_address,
     login,
     update_password
 )
@@ -126,6 +127,17 @@ class Login(Mutation):
         token, success = login(password)
         return {'token': token, 'success': success}
 
+class EditAddress(Mutation):
+    class Arguments:
+        address = String(required=True)
+
+    result = Boolean()
+
+    # @authentication_required()
+    def mutate(root, info, address):
+        result = edit_address(address=address)
+        return { 'result': result }
+
 class UpdatePassword(Mutation):
     class Arguments:
         password = String(required=True)
@@ -133,7 +145,7 @@ class UpdatePassword(Mutation):
 
     response = String()
 
-    @authentication_required()
+    # @authentication_required()
     def mutate(root, info, password=None, new_password=None):
         response = update_password(password, new_password)
         return { 'response': response }
@@ -146,5 +158,6 @@ class Mutation(ObjectType):
     edit_product_header = EditProductHeader.Field()
     edit_us = EditUs.Field()
     edit_contact_info = EditContactInfo.Field()
+    edit_address = EditAddress.Field()
     login = Login.Field()
     update_password = UpdatePassword.Field()

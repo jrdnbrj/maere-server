@@ -1,11 +1,12 @@
-from graphene import ObjectType, List, Field
+from graphene import ObjectType, List, Field, String
 
 from ...services.maere_service import (
     get_carousel, 
     get_home, 
     get_product_header, 
     get_us, 
-    get_contact_info
+    get_contact_info,
+    get_address
 )
 from ..type import (
     CarouselType, 
@@ -22,6 +23,7 @@ class Query(ObjectType):
     get_product_header = Field(ProductHeaderType)
     get_us = List(UsType)
     get_contact_info = List(ContactInfoType)
+    get_address = Field(String)
 
     def resolve_get_carousel(parent, info):
         return get_carousel()
@@ -37,4 +39,7 @@ class Query(ObjectType):
 
     def resolve_get_contact_info(parent, info):
         return get_contact_info()
+
+    def resolve_get_address(parent, info):
+        return get_address()
 

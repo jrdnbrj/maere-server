@@ -5,7 +5,8 @@ from ..db.documents import (
     Home, 
     ProductHeader, 
     Us, 
-    ContactInfo
+    ContactInfo,
+    Address
 )
 from .utils import (
     base64_to_file, 
@@ -84,6 +85,15 @@ def edit_contact_info(**kwargs):
 
     return True
 
+def get_address():
+    return Address.objects().first().address
+
+def edit_address(**kwargs):
+    address = Address.objects().first()
+    address.update(**kwargs)
+
+    return True
+
 def login(password):
     success, _ = verify_password(password)
 
@@ -107,4 +117,4 @@ def update_password(password, new_password):
         
         return 'OK'
     else:
-        return 'Las contraseñas no coinciden.'
+        return 'La contraseña actual es incorrecta.'

@@ -59,3 +59,7 @@ class ContactInfo(Document):
 class Password(Document):
     password = StringField(required=True)
     updated_at = DateTimeField(default=datetime.utcnow)
+
+class Address(Document):
+    address = StringField(required=True)
+    updated_at = DateTimeField(default=datetime.utcnow)
