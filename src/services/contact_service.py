@@ -1,10 +1,13 @@
 from ..db.documents import Contact
 
+from .utils import send_email
+
 
 def get_contacts():
     return Contact.objects()
 
 def create_contact(**kwargs):
+    send_email(kwargs)
     Contact(**kwargs).save()
 
     return True

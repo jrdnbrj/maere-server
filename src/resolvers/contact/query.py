@@ -1,5 +1,5 @@
 from graphene import ObjectType
-from graphene import List, String
+from graphene import List, Boolean
 
 from ...services.contact_service import get_contacts
 from ...middleware import authentication_required
@@ -8,11 +8,11 @@ from ...services.utils import send_email
 
 class Query(ObjectType):
     get_contacts = List(ContactType)
-    send_email = String()
+    # send_email = Boolean()
 
-    # @authentication_required()
+    @authentication_required()
     def resolve_get_contacts(parent, info):
         return get_contacts()
 
-    def resolve_send_email(parent, info):
-        return send_email()
+    # def resolve_send_email(parent, info):
+    #     return send_email()

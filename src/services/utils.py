@@ -39,30 +39,30 @@ def verify_password(password):
 
     return current_password == password, session
 
-def send_email():
-    print('11111')
+def send_email(contact):
     import smtplib
     from email.message import EmailMessage
-    print('22222')
 
     msg = EmailMessage()
-    msg['Subject'] = 'New Contact Info'
+    msg['Subject'] = 'NUEVO MENSAJE DE ' + contact.get('name') + ' en MAERE'
     msg['From'] = 'info@maere.com.ec'
-    msg['To'] = 'paola@maere.com.ec'
-    msg.set_content('Mensaaaje')
-    print('3333')
+    msg['To'] = 'paola@maere.com.ec,info@maere.com.ec'
+
+    message = '''
+        {name} ha enviado un mensaje a través de la página web de MAERE.
+
+        Nombre: {name}
+        Email: {email}
+        Teléfono: {phone}
+        Mensaje: {message}
+
+        También lo puedes revisar en https://maere.com.ec/admin
+    '''.format(**contact)
+    msg.set_content(message)
 
     with smtplib.SMTP_SSL('mail.maere.com.ec', 465) as smtp:
         try:
-            print('4444')
-            smtp.login('info@maere.com.ec', '')
-            print('5555')
+            smtp.login('paola@maere.com.ec', 'crispaoli')
             smtp.send_message(msg)
-            print('6666')
         except Exception as e:
-            # print(e)
-            print('❌❌❌')
-            return False
-
-    return True
-
+            pass
